@@ -32,9 +32,7 @@ import time
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-# Dynamically prepend the sibling examples directory to sys.path so the local
-# mock client (mock_jev_client.py) can be resolved if run in offline/test mode.
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "examples")))
+
 
 # -----------------------------------------------------------------------------
 # Environment & API Key Configuration
@@ -51,20 +49,11 @@ if _api_key and not os.getenv("TYPESAFE_API_KEY"):
     os.environ["TYPESAFE_API_KEY"] = _api_key
 
 # -----------------------------------------------------------------------------
-# Dual-Mode Client Initialization (Resilient Fallback)
+# TypeSafe AI Client Initialization
 # -----------------------------------------------------------------------------
-# Attempts to load the official production SDK. If credentials or network
-# access are unavailable, it seamlessly falls back to the local offline simulator
-# so developers can test pipelines without requiring an active API key.
-try:
-    from typesafe_sdk import TypeSafeClient, Choice, Score, Noul
-    client = TypeSafeClient(api_key=_api_key)
-    mode = "LIVE API (TypeSafe AI)"
-except Exception:
-    # pyrefly: ignore [missing-import]
-    from mock_jev_client import get_client, Choice, Score, Noul
-    client = get_client(api_key=_api_key)
-    mode = "OFFLINE SIMULATOR"
+from typesafe_sdk import TypeSafeClient, Choice, Score, Noul
+client = TypeSafeClient(api_key=_api_key)
+mode = "LIVE API (TypeSafe AI)"
 
 
 def run_fundamentals_test():

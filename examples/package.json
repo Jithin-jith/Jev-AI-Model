@@ -1,0 +1,16 @@
+{
+  "name": "jev-learning-materials",
+  "version": "1.0.0",
+  "description": "Learning modules, code examples, and projects for TypeSafe AI Jev (System One AI)",
+  "main": "index.js",
+  "scripts": {
+    "test:python": "python 05-hands-on-projects/project1-support-triage/triage_engine.py"
+  },
+  "dependencies": {
+    "@typesafe-ai/sdk": "^0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.0.0"
+  }
+}
